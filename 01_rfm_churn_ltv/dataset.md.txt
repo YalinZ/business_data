@@ -1,0 +1,25 @@
+# 数据集说明与数据字典 (Dataset Documentation)
+
+## 1. 数据集概览
+* **数据源**：UCI Machine Learning Repository / Kaggle - Online Retail II Dataset
+* **业务背景**：某跨国在线零售电商 2009-2011 年间的真实交易流水数据。
+* **数据格式**：CSV 格式 (`online_retail.csv`)
+
+## 2. 字段字典 (Data Dictionary)
+
+| 字段名称 | 数据类型 | 描述说明 | 清洗/处理规范 |
+| :--- | :--- | :--- | :--- |
+| `Invoice` | String | 订单编号 | 6位唯一数字。若以 'C' 开头，代表退货/取消订单（需过滤）。 |
+| `StockCode` | String | 商品编码 | 5位唯一数字或字母组合。 |
+| `Description` | String | 商品描述 | 包含商品名称、规格等。 |
+| `Quantity` | Integer | 购买数量 | 正数为购买，负数为退货/冲销。**分析分析时需过滤 `Quantity <= 0`**。 |
+| `InvoiceDate` | Datetime | 交易产生时间 | 格式为 `YYYY-MM-DD HH:MM:SS`。 |
+| `UnitPrice` | Float | 商品单价 | 单位：英镑 (£)。**需过滤 `UnitPrice <= 0` 的异常赠品流水**。 |
+| `CustomerID` | String/Float | 客户唯一标识 | 客户编号。**包含大量的缺失值 (Null/NaN)，进行 RFM 分析时必须剔除空值**。 |
+| `Country` | String | 客户所在国家 | 默认多数为 United Kingdom。 |
+
+## 3. 派生衍生字段计算公式
+* **`TotalPrice`（订单金额）**: $Quantity \times UnitPrice$
+* **`Recency`（最近消费间隔）**: $观察点日期 - MAX(InvoiceDate)$
+* **`Frequency`（消费频次）**: $COUNT(DISTINCT Invoice)$
+* **`Monetary`（累计消费金额）**: $SUM(TotalPrice)$

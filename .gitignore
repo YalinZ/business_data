@@ -1,0 +1,28 @@
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Python cache and temporary files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.ipynb_checkpoints/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Large dataset files
+# (online_retail.csv is 94MB, we exclude it or large csv files to keep GitHub repository lightweight)
+*.csv
+*.pkl
+*.log
+
+# App data or local configs
+.agents/
+.gemini/
+scratch/

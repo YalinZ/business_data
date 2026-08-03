@@ -1,0 +1,41 @@
+# 项目全流程 Pipeline (Project Architecture)
+
+本项目分为以下 5 个阶段逐步推进：
+
+[原始 CSV 数据]
+│
+▼
+[阶段 1: SQL/DuckDB 数仓清洗 & RFM 聚类分群]
+│
+▼
+[阶段 2: Cohort 队列矩阵与 LTV 预测分析]
+│
+▼
+[阶段 3: XGBoost 流失预测与 SHAP 可解释性归因]
+│
+▼
+[阶段 4: 持久化模型 & Streamlit 交互式决策看板]
+
+
+## 各阶段详细步骤说明
+
+### 阶段 1：SQL 数仓提取与 RFM 分群
+1. 读取 `online_retail.csv`，使用 DuckDB 执行 SQL 过滤：`CustomerID IS NOT NULL` 且 `Quantity > 0` 且 `UnitPrice > 0`。
+2. 使用 SQL 聚合计算每个客户的 R、F、M 原始数据。
+3. Python 标准化数据后使用 K-Means 聚类，将客户划分为：**核心 VIP 客户**、**潜在流失客户**、**一般保持客户**、**低价值客户**。
+4. 输出商业 Insight 与 Actionable 建议。
+
+### 阶段 2：Cohort 留存与 LTV 预测
+1. 提取客户首购月份 `CohortMonth`，构建按月留存透视表。
+2. 使用 Seaborn 绘制百分比显示的热力图（Heatmap）。
+3. 统计各 Cohort 1~12 个月的累计贡献 GMV，评估预期 LTV。
+
+### 阶段 3：流失预测与 SHAP 归因
+1. 选取观察点日期（例如数据截止前 90 天），定义 90 天内无购买的客户为流失（`Churn = 1`）。
+2. 构建特征：历史频次、平均客单价、退货率、最大购买间隔等。
+3. 划分数据集（80/20），训练 `XGBClassifier` 模型，评估 Precision/Recall/AUC。
+4. 使用 `shap` 输出特征贡献度条形图与单样本瀑布图（Waterfall Plot）。
+
+### 阶段 4： Streamlit 交互式应用
+1. 编写 `app.py`，加载保存的模型文件。
+2. 搭建动态仪表盘：包含整体 KPI、 Plotly 动态图表、客户流失风险模拟器以及高危客户 CSV 导出功能。

@@ -1,0 +1,33 @@
+# 项目任务清单 (Todo List)
+
+> **使用说明**：Agent 在完成某项任务后，需将 `- [ ]` 更改为 `- [x]`。
+
+## 阶段 1：SQL 提取与 RFM 聚类
+- [x] 校验 `online_retail.csv` 格式与字段名
+- [x] 使用 DuckDB 建立 SQL 查询，提取干净的 R/F/M 汇总表
+- [x] 数据 Log 转换与 StandardScaler 标准化
+- [x] 执行 K-Means 聚类，并将客群赋予商业标签（VIP/沉睡等）
+- [x] 编写阶段 1 的 Insight 与 Actionable 总结 Markdown
+
+## 阶段 2：Cohort 留存与 LTV 分析
+- [x] 计算 CohortMonth 与 CohortIndex 矩阵
+- [x] 绘制 Cohort 留存热力图 (Seaborn Heatmap)
+- [x] 计算不同群组的 30/90/180/365 天累计 LTV 变化
+- [x] 编写阶段 2 的 Insight 与 Actionable 总结 Markdown
+
+## 阶段 3：流失预测与 SHAP 归因
+- [x] 设定观察切片点，构建 Churn (0/1) 标签
+- [x] 特征工程：计算购买频次、客单价、退货占比等
+- [x] 训练 XGBoost 模型并输出评估报告 (Confusion Matrix, Recall, ROC-AUC)
+- [x] 运行 SHAP 分析，生成特征全局重要性与单客户归因图
+- [x] 使用 `joblib` 保存模型与 StandardScaler 为 `.pkl` 文件
+
+## 阶段 4：Streamlit 看板开发
+- [x] 搭建 `app.py` 页面架构与 KPI 指标卡片
+- [x] 接入 Plotly 绘制 3D RFM 散点图与留存热力图
+- [x] 实现流失风险交互模拟器（基于输入的客户数据实时预测）
+- [x] 添加高危高价值客户（VIP + 高流失概率）一键导出 CSV 功能
+
+## 阶段 5：总结与整理
+- [ ] 完善项目的 `README.md`
+- [ ] 检查所有图表与输出格式，确保作品集专业度

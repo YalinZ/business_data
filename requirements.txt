@@ -1,0 +1,11 @@
+pandas
+numpy
+scikit-learn
+xgboost
+shap
+duckdb
+seaborn
+plotly
+streamlit
+joblib
+lifetimes
