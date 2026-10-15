@@ -1,0 +1,53 @@
+# ==========================================
+# Python 虚拟环境与运行时缓存
+# ==========================================
+.venv/
+venv/
+ENV/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.ipynb_checkpoints/
+
+# ==========================================
+# 操作系统缓存与元数据
+# ==========================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==========================================
+# 大数据流批引擎 Checkpoint 与状态目录
+# ==========================================
+checkpoint_dir/
+checkpoints_graph/
+checkpoints_model/
+**/checkpoint_dir/
+**/checkpoints_graph/
+**/checkpoints_model/
+spark-warehouse/
+metastore_db/
+derby.log
+
+# ==========================================
+# 离线特征库与本地大模型权重文件
+# ==========================================
+*.parquet
+*.parquet/
+data/features/
+data/features/*.parquet
+data/models/
+*.pkl
+*.model
+*.tar.gz
+*.zip
+
+# ==========================================
+# 原始流水数据文件与业务日志
+# ==========================================
+*.csv
+*.log
+data/raw/*.csv
